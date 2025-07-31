@@ -12,7 +12,7 @@ options = webdriver.ChromeOptions()
 options.add_argument("start-maximized")
 options.add_argument(
     "user-data-dir=C:\\Users\\ryash\\AppData\\Local\\Google\\Chrome\\User Data\\Default"
-)  # To prevent having to sign in again later (make a new profile and set path accordingly)
+)  # To prevent having to sign in again later # Change it to your default chrome profile path by checking chrome://version
 
 options.add_argument("--headless")
 
