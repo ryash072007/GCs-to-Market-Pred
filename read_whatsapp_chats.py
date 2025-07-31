@@ -44,5 +44,6 @@ for name in gc_names:
     time.sleep(2)
     text_elems = unread_element_holder.find_elements(By.XPATH, ".//span[contains(@class, 'selectable-text copyable-text')]/span")
     for text_elem in text_elems:
-        print(text_elem.text)
+        with open(f"{name}.txt", "w") as outfile:
+            outfile.write(text_elem.text + '\n')
 
