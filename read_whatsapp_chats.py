@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium_stealth import stealth
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 import time
 
 options = webdriver.ChromeOptions()
@@ -9,7 +10,7 @@ options.add_argument(
     "user-data-dir=C:\\Users\\ryash\\AppData\\Local\\Google\\Chrome\\User Data\\Default"
 )  # To prevent having to sign in again later (make a new profile and set path accordingly)
 
-# options.add_argument("--headless")
+options.add_argument("--headless")
 
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option("useAutomationExtension", False)
@@ -28,12 +29,22 @@ stealth(
 
 web_url = "https://web.whatsapp.com/"
 
+driver.get(web_url)
+
 gc_names = [
-    "Ayush PATRO",
+    "Yash Raj",
 ]
 
-driver.get(web_url)
-element = driver.find_element(By.XPATH, f"//span[@title='{gc_names[0]}']")
-element.click()
+elements = {}
 
-time.sleep(300)
+for name in gc_names:
+    element = driver.find_element(By.XPATH, f"//span[@title='{name}']")
+    element.click()
+    # unread_element_grandpa = driver.find_element(By.XPATH, "//span[text()[contains(., 'unread message')]]/parent::span/parent::div")
+    # unread_element_grandpa_holder: WebElement = unread_element_grandpa.parent
+    # elems = unread_element_grandpa_holder.find_elements(By.XPATH, "/div[@tabindex='-1' and @role='row' and @class]")
+    # for elem in elems:
+    time.sleep(5)
+    text_elems = driver.find_elements(By.XPATH, "//span[contains(@class, 'selectable-text copyable-text')]/span")
+    for text_elem in text_elems:
+        print(text_elem.text)
