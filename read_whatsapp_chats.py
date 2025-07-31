@@ -40,11 +40,9 @@ elements = {}
 for name in gc_names:
     element = driver.find_element(By.XPATH, f"//span[@title='{name}']")
     element.click()
-    # unread_element_grandpa = driver.find_element(By.XPATH, "//span[text()[contains(., 'unread message')]]/parent::span/parent::div")
-    # unread_element_grandpa_holder: WebElement = unread_element_grandpa.parent
-    # elems = unread_element_grandpa_holder.find_elements(By.XPATH, "/div[@tabindex='-1' and @role='row' and @class]")
-    # for elem in elems:
-    time.sleep(5)
-    text_elems = driver.find_elements(By.XPATH, "//span[contains(@class, 'selectable-text copyable-text')]/span")
+    unread_element_holder = driver.find_element(By.XPATH, "//span[text()[contains(., 'unread message')]]/../../following-sibling::*[1]")
+    time.sleep(2)
+    text_elems = unread_element_holder.find_elements(By.XPATH, ".//span[contains(@class, 'selectable-text copyable-text')]/span")
     for text_elem in text_elems:
         print(text_elem.text)
+
