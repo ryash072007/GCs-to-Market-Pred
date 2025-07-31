@@ -4,6 +4,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 import time
 
+gc_names = [
+    "Yash Raj",
+]
+
 options = webdriver.ChromeOptions()
 options.add_argument("start-maximized")
 options.add_argument(
@@ -31,10 +35,6 @@ web_url = "https://web.whatsapp.com/"
 
 driver.get(web_url)
 
-gc_names = [
-    "Yash Raj",
-]
-
 elements = {}
 
 for name in gc_names:
@@ -44,6 +44,6 @@ for name in gc_names:
     time.sleep(2)
     text_elems = unread_element_holder.find_elements(By.XPATH, ".//span[contains(@class, 'selectable-text copyable-text')]/span")
     for text_elem in text_elems:
-        with open(f"{name}.txt", "w") as outfile:
+        with open(f"{name}.txt", "a") as outfile:
             outfile.write(text_elem.text + '\n')
 
